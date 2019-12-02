@@ -41,10 +41,10 @@ class Point:
 box = Rectangle(Point(0,0), 100, 200)
 bomb = Rectangle(Point(100,80), 5, 10)
 
-r = Rectangle(Point(0,0), 15 ,5)
+r = Rectangle(Point(0,0), 10 ,5)
 # r.grow(20,10)
 print(r.flip())
 
-p1 = Point(20,3)
+p1 = Point(-3,-3)
 
 r.contains(p1)
