@@ -19,6 +19,11 @@ class Rectangle:
         self.corner.x += dx
         self.corner.y += dy
 
+    def flip(self):
+        nw = self.height
+        nh = self.width
+        return(nw, nh)
+
 class Point:
     def __init__(self, x=0, y=0):
         self.x = x
@@ -27,9 +32,9 @@ class Point:
 box = Rectangle(Point(0,0), 100, 200)
 bomb = Rectangle(Point(100,80), 5, 10)
 
-r = Rectangle(Point(0,0), 10 ,5)
-r.grow(10,10)
-print(r.area())
+r = Rectangle(Point(0,0), 15 ,5)
+# r.grow(20,10)
+print(r.flip())
 
 
 
