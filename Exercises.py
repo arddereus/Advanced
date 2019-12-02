@@ -11,9 +11,9 @@ class Rectangle:
     def area(self):
         return (self.height)*(self.width)
 
-    def grow(self, delta_width, delta_height):
-        self.width += delta_width
-        self.height += delta_height
+    def grow(self, dw, dh):
+        self.width += dw
+        self.height += dh
 
     def move(self, dx, dy):
         self.corner.x += dx
