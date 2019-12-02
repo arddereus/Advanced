@@ -24,6 +24,15 @@ class Rectangle:
         nh = self.width
         return(nw, nh)
 
+    def contains(self,pt):
+        x1 = self.corner.x
+        x2 = self.corner.x + self.width
+        y1 = self.corner.y
+        y2 = self.corner.y + self.height
+        if (pt.x >= x1 and pt.x <= x2 and pt.y >= y1 and pt.y <= y2):
+            print('The point is inside the rectangle')
+        else:
+            print('The point is outside the rectangle')
 class Point:
     def __init__(self, x=0, y=0):
         self.x = x
@@ -36,12 +45,6 @@ r = Rectangle(Point(0,0), 15 ,5)
 # r.grow(20,10)
 print(r.flip())
 
+p1 = Point(20,3)
 
-
-p = Point(4,2)
-s = Point(4,2)
-# print(p == s)
-
-a = [2,3]
-b = [2,3]
-# print(a == b)
+r.contains(p1)
