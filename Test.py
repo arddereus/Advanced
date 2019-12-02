@@ -16,14 +16,28 @@ class Point:
          sxo = (self.y)/(self.x)
          return sxo
 
-# p1 = Point(10, 5)
-# r = p1.slope_from_origin()
+     def print_point(self):
+         print("({0},{1})".format(self.x, self.y))
+
+     def get_line_to_point(self, target):
+         Aa = (self.y + target.y)/(self.x + target.y)
+         Bb = (target.y - (Aa)*(target.x))
+         return Point(Aa, Bb)
+
+
+p1 = Point(4, 11)
+p2 = Point(6,15)
+r = p1.get_line_to_point(p2)
+print(r.x, r.y)
+
+
+# r = p1.print_point()
 # print(r)
 
-p2 = Point(20,10)
-p3 = Point(80,20)
-r1 = p2.halfway(p3)
-print(r1.x, r1.y)
+# p2 = Point(20,10)
+# p3 = Point(80,20)
+# r1 = p2.halfway(p3)
+# print(r1.x, r1.y)
 
 
 # #
