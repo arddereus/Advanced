@@ -45,6 +45,6 @@ r = Rectangle(Point(0,0), 10 ,5)
 # r.grow(20,10)
 print(r.flip())
 
-p1 = Point(-3,-3)
+p1 = Point(5,3)
 
 r.contains(p1)
