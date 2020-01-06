@@ -3,6 +3,10 @@ from requests import get
 from requests.exceptions import RequestException
 from contextlib import closing
 from bs4 import BeautifulSoup
+from datetime import datetime
+import locale
+import pandas as pd
+import numpy as np
 
 res = requests.get('http://www.fabpedigree.com/james/mathmen.htm')
 res.raise_for_status()
@@ -13,56 +17,32 @@ for i, li in enumerate(MatM.select('li')):
 MatM3 = [i.split('\n', 1)[0] for i in MatM2]
 
 dates = []
+length = 30
+
 def GetEdit(Name):
+     locale.setlocale(locale.LC_TIME, "nl_NL")
      res2 = requests.get('https://nl.wikipedia.org/wiki/' + Name)
      res2.raise_for_status()
-
      html = bs4.BeautifulSoup(res2.text, "html.parser")
-     for li in html.find_all('li'):
-          print(li.find_all('footer-info-lastmod'))
 
-Name2 = (MatM3[0])
-print(GetEdit(Name2))
-
-# hit_link = [li for li in html.select('li')
-# if li['.id'].find('footer-info-lastmod') > -1]
-# return hit_link
-# html2 = html.select('ul li')
-# <li id="footer-info-lastmod"> This page was last edited on 20 December 2019, at 02:27<span class="anonymous-show">&nbsp;(UTC)</span>.</li>
+     laatste_bewerkt = html.find(id="footer-info-lastmod")
+     datum = datetime.strptime(str(laatste_bewerkt)[72:-6], "%d %b %Y om %H:%M")
+     return datum.isoformat()
 
 
+for i in range(length):
+     MatM4 = MatM3[0:length]
+     try:
+          dates.append(GetEdit(MatM3[i]))
+     except:
+          dates.append(None)
 
+df = pd.DataFrame(list(zip(MatM4, dates)),
+      columns =['Name', 'Date'])
+df = df[df.Date.notnull()]
+FinalFrame = df.sort_values(by=['Date'])
 
-# name = MatM3[0]
-# def obtainpop(name):
-# res2 = requests.get('https://xtools.wmflabs.org/articleinfo/en.wikipedia.org/' + name)
-# pophtml = bs4.BeautifulSoup(res2.text, "html.parser")
-# print(pophtml)
-
-# print(obtainpop(name = MatM3[0]))
-
-
-
-
-    # if response is not None:
-    #     html = BeautifulSoup(response, 'html.parser')
-    #     hit_link = [a for a in html.select('a')
-    #                 if a['href'].find('latest-60') > -1]
-    #
-    #     if len(hit_link) > 0:
-    #         # Strip commas
-    #         link_text = hit_link[0].text.replace(',', '')
-    #         try:
-    #             # Convert to integer
-    #             return int(link_text)
-    #         except:
-    #             log_error("couldn't parse {} as an `int`".format(link_text))
-    #
-    # log_error('No pageviews found for {}'.format(name))
-    # return None
-
-
-
+print(FinalFrame)
 
 
 
