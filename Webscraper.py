@@ -41,8 +41,23 @@ df = pd.DataFrame(list(zip(MatM4, dates)),
       columns =['Name', 'Date'])
 df = df[df.Date.notnull()]
 FinalFrame = df.sort_values(by=['Date'])
-
+lastname = FinalFrame.iloc[0]['Name']
+lasttime = FinalFrame.iloc[0]['Date']
 print(FinalFrame)
+
+print('The poor guy' + lastname + ' was edited last at ' + lasttime + '...')
+
+answer = input("Do you wanna help the Scientific Community, by updating this webpage?")
+if answer == 'yes':
+     print("Okay, let's Go!")
+     webbrowser.open('https://nl.wikipedia.org/w/index.php?title=' + lastname + '&action=edit')
+else:
+     webbrowser.open('https://www.google.com/search?q=why+mathematics+and+philosophy+is+important&oq=why+mathematics+and+philo&aqs=chrome.1.69i57j33l7.8487j0j4&sourceid=chrome&ie=UTF-8')
+
+
+
+
+
 
 
 
